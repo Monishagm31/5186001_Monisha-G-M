@@ -10,5 +10,14 @@
 ### image2
 ![certificate1](image/certificate1.png)
 
+## [✔] C completion
+  <div style="text-align: center;">
+  <img src="image/introduction to C certificate.png" alt="Descriptive Alt Text" style="max-width: 80%; height: auto; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);" />
+</div>
+ 
+  <div style="text-align: center;">
+  <img src="image/C intermediate.png" alt="Descriptive Alt Text" style="max-width: 80%; height: auto; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);" />
+</div>
+
 
 
