@@ -8,8 +8,8 @@
 
 #### C Completion
 ### C_Intermediate
-![C intermediate](C completion/C_intermediate.jpg)
+![C intermediate](C Completion/C_intermediate.jpg)
 
 ### Introduction to C
-![introduction to C](C Completion/Introduction to C.jpg)
+![introduction to C](C Completion/Introduction_t _C.jpg)
 
