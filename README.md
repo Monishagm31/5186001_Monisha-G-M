@@ -6,10 +6,8 @@
 ### Git_Training
 ![Git certificate](git_week2/Git_Training.jpg)
 
-#### C Completion
-### C_Intermediate
-![C intermediate](C completion/C_intermediate.jpg)
+### C completion
+![C Completion](C%20Completion/C_Intermediate.jpg)
+![C Completion](C%20Completion/Introduction _to _C.jpg)
 
-### Introduction to C
-![introduction to C](C Completion/Introduction to C.jpg)
 
