@@ -9,5 +9,4 @@
 ### C completion
 ![C Completion](C%20Completion/C_Intermediate.jpg)
 
-### C completion
-![C Completion](C%20Completion/Introduction_to_C.jpg)
+
