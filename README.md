@@ -20,8 +20,7 @@ You'll find **certificates, exercises, and practical implementations** that high
 - 🛠️ [Git & Version Control](./git_week2)
 - 🐧 [Linux Command Line](./linux_commands)
 - 💻 [C Programming](./C%20Completion)
-- 🧪 [HackerRank Practice](./hackerrank)
-- 📄 [Simple C Program](./Text.c)
+  
 
 ## Agile_completion
 ![Agile completion](Agile_completion.png)
