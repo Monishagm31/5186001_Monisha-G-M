@@ -15,33 +15,6 @@ char* rtrim(char*);
 
 int parse_int(char*);
 long parse_long(char*);
-
-/*
- * Complete the 'counterGame' function below.
- *
- * The function is expected to return a STRING.
- * The function accepts LONG_INTEGER n as parameter.
- */
-
-/*
- * To return the string from the function, you should either do static allocation or dynamic allocation
- *
- * For example,
- * char* return_string_using_static_allocation() {
- *     static char s[] = "static allocation of string";
- *
- *     return s;
- * }
- *
- * char* return_string_using_dynamic_allocation() {
- *     char* s = malloc(100 * sizeof(char));
- *
- *     s = "dynamic allocation of string";
- *
- *     return s;
- * }
- *
- */
 char* counterGame(long n) {
     static char louise[] = "Louise";
     static char richard[] = "Richard";
