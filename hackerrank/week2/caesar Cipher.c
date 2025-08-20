@@ -14,35 +14,6 @@ char* ltrim(char*);
 char* rtrim(char*);
 
 int parse_int(char*);
-
-/*
- * Complete the 'caesarCipher' function below.
- *
- * The function is expected to return a STRING.
- * The function accepts following parameters:
- *  1. STRING s
- *  2. INTEGER k
- */
-
-/*
- * To return the string from the function, you should either do static allocation or dynamic allocation
- *
- * For example,
- * char* return_string_using_static_allocation() {
- *     static char s[] = "static allocation of string";
- *
- *     return s;
- * }
- *
- * char* return_string_using_dynamic_allocation() {
- *     char* s = malloc(100 * sizeof(char));
- *
- *     s = "dynamic allocation of string";
- *
- *     return s;
- * }
- *
- */
 char* caesarCipher(char* s, int k) {
     int len = strlen(s);
     char *result = malloc((len + 1) * sizeof(char));
