@@ -12,18 +12,7 @@
 char* readline();
 char* ltrim(char*);
 char* rtrim(char*);
-
 int parse_int(char*);
-
-/*
- * Complete the 'pageCount' function below.
- *
- * The function is expected to return an INTEGER.
- * The function accepts following parameters:
- *  1. INTEGER n
- *  2. INTEGER p
- */
-
 int pageCount(int n, int p) {
     int fromFront = p / 2;
     int fromBack = (n / 2) - (p / 2);
