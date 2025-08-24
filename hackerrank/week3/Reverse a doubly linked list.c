@@ -89,21 +89,14 @@ void free_doubly_linked_list(DoublyLinkedListNode* node) {
 DoublyLinkedListNode* reverse(DoublyLinkedListNode* llist) {
     DoublyLinkedListNode* current = llist;
     DoublyLinkedListNode* temp = NULL;
-
-    // Traverse and swap next and prev for each node
     while (current != NULL) {
-        // Swap the next and prev pointers
         temp = current->prev;
         current->prev = current->next;
         current->next = temp;
-
-        // Move to the next node in original list (which is prev now)
         current = current->prev;
     }
-
-    // After the loop, temp will be pointing to the previous of the new head
     if (temp != NULL) {
-        llist = temp->prev;  // new head
+        llist = temp->prev;  
     }
 
     return llist;
