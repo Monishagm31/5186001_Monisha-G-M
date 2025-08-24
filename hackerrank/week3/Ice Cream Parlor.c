@@ -1,92 +1,230 @@
+#include <assert.h>
+#include <ctype.h>
+#include <limits.h>
+#include <math.h>
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
 
-char* read_line();
-int to_int(char*);
-char** split_tokens(char*);
+char* readline();
+char* ltrim(char*);
+char* rtrim(char*);
+char** split_string(char*);
 
-int* icecreamParlor(int money, int arr_size, int* costs, int* result_size) {
-    *result_size = 2;
-    int *ans = malloc(2 * sizeof(int));
+int parse_int(char*);
 
-    for (int p = 0; p < arr_size; p++) {
-        for (int q = p + 1; q < arr_size; q++) {
-            if (costs[p] + costs[q] == money) {
-                ans[0] = p + 1;   
-                ans[1] = q + 1;
-                return ans;
+/*
+ * Complete the 'icecreamParlor' function below.
+ *
+ * The function is expected to return an INTEGER_ARRAY.
+ * The function accepts following parameters:
+ *  1. INTEGER m
+ *  2. INTEGER_ARRAY arr
+ */
+
+/*
+ * To return the integer array from the function, you should:
+ *     - Store the size of the array to be returned in the result_count variable
+ *     - Allocate the array statically or dynamically
+ *
+ * For example,
+ * int* return_integer_array_using_static_allocation(int* result_count) {
+ *     *result_count = 5;
+ *
+ *     static int a[5] = {1, 2, 3, 4, 5};
+ *
+ *     return a;
+ * }
+ *
+ * int* return_integer_array_using_dynamic_allocation(int* result_count) {
+ *     *result_count = 5;
+ *
+ *     int *a = malloc(5 * sizeof(int));
+ *
+ *     for (int i = 0; i < 5; i++) {
+ *         *(a + i) = i + 1;
+ *     }
+ *
+ *     return a;
+ * }
+ *
+ */
+int* icecreamParlor(int m, int arr_count, int* arr, int* result_count) {
+     int* result = malloc(2 * sizeof(int));
+
+    for (int i = 0; i < arr_count; i++) {
+        for (int j = i + 1; j < arr_count; j++) {
+            if (arr[i] + arr[j] == m) {
+                result[0] = i + 1; 
+                result[1] = j + 1;
+                *result_count = 2;
+                return result;
             }
         }
     }
-
-    ans[0] = ans[1] = -1;
-    return ans;
+    *result_count = 0;
+    return NULL;
 }
 
-int main() {
+int main()
+{
     FILE* fptr = fopen(getenv("OUTPUT_PATH"), "w");
-    int t = to_int(read_line());
 
-    for (int tc = 0; tc < t; tc++) {
-        int m = to_int(read_line());
-        int n = to_int(read_line());
+    int t = parse_int(ltrim(rtrim(readline())));
 
-        char** tokens = split_tokens(read_line());
+    for (int t_itr = 0; t_itr < t; t_itr++) {
+        int m = parse_int(ltrim(rtrim(readline())));
+
+        int n = parse_int(ltrim(rtrim(readline())));
+
+        char** arr_temp = split_string(rtrim(readline()));
+
         int* arr = malloc(n * sizeof(int));
 
-        for (int k = 0; k < n; k++) {
-            arr[k] = to_int(tokens[k]);
+        for (int i = 0; i < n; i++) {
+            int arr_item = parse_int(*(arr_temp + i));
+
+            *(arr + i) = arr_item;
         }
 
-        int res_size;
-        int* res = icecreamParlor(m, n, arr, &res_size);
+        int result_count;
+        int* result = icecreamParlor(m, n, arr, &result_count);
 
-        for (int idx = 0; idx < res_size; idx++) {
-            fprintf(fptr, "%d", res[idx]);
-            if (idx < res_size - 1) fprintf(fptr, " ");
+        for (int i = 0; i < result_count; i++) {
+            fprintf(fptr, "%d", *(result + i));
+
+            if (i != result_count - 1) {
+                fprintf(fptr, " ");
+            }
         }
+
         fprintf(fptr, "\n");
-
-        free(arr);
-        free(res);
-        free(tokens);
     }
 
     fclose(fptr);
+
     return 0;
 }
 
-char* read_line() {
-    size_t cap = 1024, len = 0;
-    char* buf = malloc(cap);
-    if (!buf) exit(1);
+char* readline() {
+    size_t alloc_length = 1024;
+    size_t data_length = 0;
 
-    while (fgets(buf + len, cap - len, stdin)) {
-        len += strlen(buf + len);
-        if (len == 0 || buf[len - 1] == '\n') break;
-        cap *= 2;
-        buf = realloc(buf, cap);
-        if (!buf) exit(1);
+    char* data = malloc(alloc_length);
+
+    while (true) {
+        char* cursor = data + data_length;
+        char* line = fgets(cursor, alloc_length - data_length, stdin);
+
+        if (!line) {
+            break;
+        }
+
+        data_length += strlen(cursor);
+
+        if (data_length < alloc_length - 1 || data[data_length - 1] == '\n') {
+            break;
+        }
+
+        alloc_length <<= 1;
+
+        data = realloc(data, alloc_length);
+
+        if (!data) {
+            data = '\0';
+
+            break;
+        }
     }
 
-    if (len && buf[len - 1] == '\n') buf[len - 1] = '\0';
-    return buf;
-}
+    if (data[data_length - 1] == '\n') {
+        data[data_length - 1] = '\0';
 
-int to_int(char* s) {
-    return (int)strtol(s, NULL, 10);
-}
+        data = realloc(data, data_length);
 
-char** split_tokens(char* line) {
-    char** arr = NULL;
-    int count = 0;
-    char* tok = strtok(line, " ");
-    while (tok) {
-        arr = realloc(arr, sizeof(char*) * (count + 1));
-        arr[count++] = tok;
-        tok = strtok(NULL, " ");
+        if (!data) {
+            data = '\0';
+        }
+    } else {
+        data = realloc(data, data_length + 1);
+
+        if (!data) {
+            data = '\0';
+        } else {
+            data[data_length] = '\0';
+        }
     }
-    return arr;
+
+    return data;
+}
+
+char* ltrim(char* str) {
+    if (!str) {
+        return '\0';
+    }
+
+    if (!*str) {
+        return str;
+    }
+
+    while (*str != '\0' && isspace(*str)) {
+        str++;
+    }
+
+    return str;
+}
+
+char* rtrim(char* str) {
+    if (!str) {
+        return '\0';
+    }
+
+    if (!*str) {
+        return str;
+    }
+
+    char* end = str + strlen(str) - 1;
+
+    while (end >= str && isspace(*end)) {
+        end--;
+    }
+
+    *(end + 1) = '\0';
+
+    return str;
+}
+
+char** split_string(char* str) {
+    char** splits = NULL;
+    char* token = strtok(str, " ");
+
+    int spaces = 0;
+
+    while (token) {
+        splits = realloc(splits, sizeof(char*) * ++spaces);
+
+        if (!splits) {
+            return splits;
+        }
+
+        splits[spaces - 1] = token;
+
+        token = strtok(NULL, " ");
+    }
+
+    return splits;
+}
+
+int parse_int(char* str) {
+    char* endptr;
+    int value = strtol(str, &endptr, 10);
+
+    if (endptr == str || *endptr != '\0') {
+        exit(EXIT_FAILURE);
+    }
+
+    return value;
 }
